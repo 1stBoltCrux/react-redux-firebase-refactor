@@ -24,6 +24,7 @@ class ItemList extends Component {
     // }
 
     componentDidMount() {
+
       this.props.fetchData('http://5826ed963900d612000138bd.mockapi.io/items')
 
       //PRE REDUX FUNCTION CALL//
@@ -31,6 +32,7 @@ class ItemList extends Component {
     }
 
     render(){
+            console.log(this.props);
       if (this.props.hasErrored ){
         return <p>Sorry! There was an error loading the items</p>
       }
