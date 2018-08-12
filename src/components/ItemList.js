@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { itemsFetchData } from '../actions/items';
+import { withFirebase } from 'react-redux-firebase'
+import firebase from 'firebase'
 
 class ItemList extends Component {
-
 // PRE-REDUX FETCH API CALL //
 
     // fetchData(url) {
@@ -26,13 +27,14 @@ class ItemList extends Component {
     componentDidMount() {
 
       this.props.fetchData('http://5826ed963900d612000138bd.mockapi.io/items')
-
       //PRE REDUX FUNCTION CALL//
       // this.fetchData('http://5826ed963900d612000138bd.mockapi.io/items');
     }
 
     render(){
-            console.log(this.props);
+      const pushTest = () => firebase.push('test', this.props.items[1])
+
+
       if (this.props.hasErrored ){
         return <p>Sorry! There was an error loading the items</p>
       }
@@ -43,7 +45,7 @@ class ItemList extends Component {
       return (
         <ul>
           {this.props.items.map((item)=> (
-            <li key={item.id}>
+            <li onClick={pushTest} key={item.id}>
               {item.label}
             </li>
           ))}
